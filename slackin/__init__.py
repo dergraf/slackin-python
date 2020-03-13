@@ -33,7 +33,7 @@ import requests
 import docopt
 
 from flask import Flask, render_template, request, send_from_directory, make_response
-from werkzeug.contrib.cache import SimpleCache
+from cachelib import SimpleCache
 from htmlmin.minify import html_minify
 
 cache = SimpleCache()
@@ -98,7 +98,7 @@ def invite():
 
 @app.route("/slackin.js")
 def badge_js():
-    return app.send_static_file("badge.js") 
+    return app.send_static_file("badge.js")
 
 
 @app.route("/iframe")
@@ -161,7 +161,7 @@ def main():
         args["--port"] = 3000
     if args["--interval"] is None:
         args["--interval"] = 1000
-    
+
     app.config["token"] = args["<api-token>"]
     app.config["team"] = args["<slack-subdomain>"]
     app.config["interval"] = int(args["--interval"])
